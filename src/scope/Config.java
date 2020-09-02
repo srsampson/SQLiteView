@@ -16,8 +16,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Configuration class
- *
- * @author Steve Sampson, January 2020
  */
 public final class Config {
 
@@ -122,14 +120,12 @@ public final class Config {
     private boolean noProps;
     //
     private final Timestamp sqlTime;
-    private final ZuluMillis zulu;
     //
     private final Color[] colorMap;
     private String databaseName;
 
     Config(String conf, String map) {
         sqlTime = new Timestamp(0L);
-        zulu = new ZuluMillis();
         colorMap = new Color[30];
         noProps = false;
         booleanSettings = new ConcurrentHashMap<>(25);
@@ -752,7 +748,7 @@ public final class Config {
             bout = new BufferedWriter(fout);
 
             bout.write("#\r\n# SQliteViewer Configuration File\r\n#\r\n# ");
-            sqlTime.setTime(zulu.getUTCTime());
+            sqlTime.setTime(System.currentTimeMillis());
             bout.write(sqlTime.toString() + "\r\n#\r\n");
 
             bout.write("db.name = " + databaseName + "\r\n");
